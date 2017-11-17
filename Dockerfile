@@ -5,13 +5,13 @@
 # docker run -d -p <port>:4040 -v "/path/to/music:/var/music:ro" luphy/subsonic
 
 FROM ubuntu:16.04
-MAINTAINER adammillere@gmail.com
+MAINTAINER adam@adammiller.io
 
 # Noninteractive debconfig
 ENV DEBIAN_FRONTEND noninteractive
 
 # Specify the version of Subsonic to be downloaded
-ENV SUBSONIC_VERSION 6.1.1
+ENV SUBSONIC_VERSION 6.1.3
 
 # Create a new user account with UID/GID at least 10000.
 # This makes it easier to keep host and docker accounts apart.
@@ -32,7 +32,7 @@ ENV LC_ALL en_US.UTF-8
 RUN locale-gen en_US.UTF-8  
 
 # Download the specified version from sourceforge
-ADD http://downloads.sourceforge.net/project/subsonic/subsonic/$SUBSONIC_VERSION/subsonic-$SUBSONIC_VERSION.deb?r=http%3A%2F%2Fsourceforge.net%2Fprojects%2Fsubsonic%2Ffiles%2Fsubsonic%2F$SUBSONIC_VERSION%2F&ts=1421842428&use_mirror=optimate /tmp/subsonic-$SUBSONIC_VERSION.deb
+ADD http://downloads.sourceforge.net/project/subsonic/subsonic/$SUBSONIC_VERSION/subsonic-$SUBSONIC_VERSION.deb /tmp/subsonic-$SUBSONIC_VERSION.deb
 
 # Install subsonic
 RUN dpkg -i /tmp/subsonic-$SUBSONIC_VERSION.deb && rm -f /tmp/*.deb
